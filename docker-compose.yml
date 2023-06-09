@@ -1,6 +1,18 @@
 version: '3'
 
 services:
+  db_postgres:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=api_db
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+
   api:
     build:
       context: .
@@ -17,11 +29,3 @@ services:
     depends_on:
       - db_postgres
 
-  db_postgres:
-    image: postgres:12
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=api_db

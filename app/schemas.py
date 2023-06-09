@@ -1,5 +1,6 @@
-from dataclasses import dataclass, field
-from typing import Optional, Dict, List
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Optional
 
 import marshmallow_dataclass
 
@@ -34,5 +35,20 @@ class BaseSchema:
 @dataclass
 class CallerInfo(BaseSchema):
     phone_number: str
-    ip: str
-    push_token: str
+    push_token: Optional[str] = None
+    ip: Optional[str] = None
+
+
+@dataclass
+class CalleeInfo(BaseSchema):
+    phone_number: str
+    push_token: Optional[str] = None
+    ip: Optional[str] = None
+
+
+@dataclass
+class CallSessionInfo(BaseSchema):
+    caller_id: int
+    callee_id: int
+    call_session_initiation_dttm: datetime
+    delay: int
